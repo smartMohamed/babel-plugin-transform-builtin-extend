@@ -72,6 +72,11 @@ export default function({types: t}){
                 const superClass = path.get('superClass');
                 if (!superClass.node) return;
 
+                // Other plugins might wrap the super class in parenthesis
+                if (superClass.type === 'ParenthesizedExpression') {
+                    superClass = superClass.get('expression');
+                }
+
                 // Ensure that the class is extending a variable matching one of the options.
                 const matches = classes.some(name => superClass.isIdentifier({name}));
                 if (!matches) return;
