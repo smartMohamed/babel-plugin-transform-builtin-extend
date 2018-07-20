@@ -69,7 +69,7 @@ export default function({types: t}){
                 if (classes.length === 0) return;
 
                 // Ensure the class is extending something.
-                const superClass = path.get('superClass');
+                let superClass = path.get('superClass');
                 if (!superClass.node) return;
 
                 // Other plugins might wrap the super class in parenthesis
